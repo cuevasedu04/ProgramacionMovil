@@ -1,3 +1,5 @@
+package tarea01;
+
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,7 +20,7 @@ public class Ventana2 extends JFrame {
         btnSaludar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "hola");
+                JOptionPane.showMessageDialog(null, "Qué oñaaa");
             }
         });
 

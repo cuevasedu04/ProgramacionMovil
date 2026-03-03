@@ -1,3 +1,5 @@
+package tarea01;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -15,7 +17,7 @@ public class Ventana extends JFrame implements ActionListener{
     public Ventana(){
         ancho = 400;
         alto=400;
-        setTitle("Mi Ventana");
+        setTitle("Mi tarea01.Ventana");
         setSize(ancho, alto);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -60,5 +62,5 @@ public class Ventana extends JFrame implements ActionListener{
 
 /// Hacer la logica para que diga si eres mayor de edad, para el 20 de marzo todos los programas que vayan dejando.
 
-/// 1.- Ventana de mayor de edad
+/// 1.- tarea01.Ventana de mayor de edad
 
