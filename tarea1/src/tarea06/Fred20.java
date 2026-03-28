@@ -2,105 +2,86 @@ package tarea06;
 
 import java.awt.Color;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
-public class Fred20 extends JFrame implements ActionListener {
+public class Fred20 extends JFrame {
 
     JButton[] casillas = new JButton[4];
-    int[] secuencia = new int[50];
-    int nivelActual = 1;
-    int clicUsuario = 0;
-    boolean turnoUsuario = false;
-
+    int[] secuencia = new int[6];
     Random r = new Random();
-    Color[] coloresBrillantes = {Color.GREEN, Color.RED, Color.YELLOW, Color.BLUE};
+
+    Color[] coloresBrillantes = {Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW};
 
     public Fred20() {
+        setTitle("Fred20");
         setSize(350, 350);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridLayout(2, 2, 5, 5));
 
         for (int i = 0; i < casillas.length; i++) {
             casillas[i] = new JButton();
-            casillas[i].setBackground(Color.DARK_GRAY);
+            casillas[i].setBackground(Color.GRAY);
             casillas[i].setFocusPainted(false);
-            casillas[i].addActionListener(this);
+
+            final int indiceBoton = i;
+
+            casillas[i].addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    casillas[indiceBoton].setBackground(coloresBrillantes[indiceBoton]);
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                    casillas[indiceBoton].setBackground(Color.GRAY);
+                }
+            });
+
             add(casillas[i]);
         }
 
-        iniciarJuego();
-    }
-
-    public void iniciarJuego() {
-        nivelActual = 1;
-        secuencia[0] = r.nextInt(4);
+        crearSecuencia();
         mostrarSecuencia();
     }
 
-    public void mostrarSecuencia() {
-        turnoUsuario = false;
-        setTitle("Memoria - Nivel " + nivelActual + " (Observa...)");
+    public void crearSecuencia() {
+        for (int i = 0; i < secuencia.length; i++) {
+            secuencia[i] = r.nextInt(4);
+        }
 
+        System.out.print("Secuencia generada: ");
+        for (int x : secuencia) {
+            System.out.print(x + " ");
+        }
+        System.out.println();
+    }
+
+    public void mostrarSecuencia() {
         Thread hilo = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     Thread.sleep(1000);
 
-                    for (int i = 0; i < nivelActual; i++) {
+                    for (int i = 0; i < secuencia.length; i++) {
                         int indice = secuencia[i];
 
                         casillas[indice].setBackground(coloresBrillantes[indice]);
-                        Thread.sleep(600);
+                        Thread.sleep(800);
 
-                        casillas[indice].setBackground(Color.DARK_GRAY);
-                        Thread.sleep(250);
+                        casillas[indice].setBackground(Color.GRAY);
+                        Thread.sleep(300);
                     }
-
-                    turnoUsuario = true;
-                    clicUsuario = 0;
-                    setTitle("Memoria - Nivel " + nivelActual + " (¡Tu turno!)");
-
                 } catch (InterruptedException e) {
-                    System.out.println("El hilo fue interrumpido");
+                    System.out.println(" hilo interrumpido");
                 }
             }
         });
         hilo.start();
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (!turnoUsuario) {
-            return;
-        }
-
-        int botonPresionado = -1;
-        for (int i = 0; i < 4; i++) {
-            if (e.getSource() == casillas[i]) {
-                botonPresionado = i;
-                break;
-            }
-        }
-
-        if (botonPresionado == secuencia[clicUsuario]) {
-            clicUsuario++;
-
-            if (clicUsuario == nivelActual) {
-                nivelActual++;
-                secuencia[nivelActual - 1] = r.nextInt(4);
-                mostrarSecuencia();
-            }
-        } else {
-            turnoUsuario = false;
-            JOptionPane.showMessageDialog(this, "¡Oh no! Te equivocaste.\nLlegaste al nivel " + nivelActual);
-            iniciarJuego();
-        }
     }
 
     public static void main(String[] args) {
