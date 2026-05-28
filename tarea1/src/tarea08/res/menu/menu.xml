@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/file"
+        android:title="M E N U">
+        <menu>
+            <item
+                android:id="@+id/itemformulario"
+                android:title="formulario" />
+            <item
+                android:id="@+id/itemlistado"
+                android:title="listado" />
+        </menu>
+    </item>
+</menu>

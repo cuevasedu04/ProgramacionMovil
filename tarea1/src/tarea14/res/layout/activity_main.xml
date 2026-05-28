@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <EditText
+        android:id="@+id/txtMensaje"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Escribe un mensaje" />
+
+    <Button
+        android:id="@+id/btnWhatsapp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enviar a WhatsApp" />
+
+    <Button
+        android:id="@+id/btnCorreo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enviar por Correo" />
+
+    <Button
+        android:id="@+id/btnSMS"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enviar por SMS" />
+
+</LinearLayout>
